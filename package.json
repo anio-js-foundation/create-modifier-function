@@ -1,0 +1,22 @@
+{
+  "name": "@anio-js-foundation/create-modifier-function",
+  "version": "1.0.0",
+  "description": "Create a function that accepts modifiers.",
+  "main": "./dist/package.mjs",
+  "author": "Anio Software <info@anio.software>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anio-js-foundation/create-modifier-function.git"
+  },
+  "devDependencies": {
+    "@anio-js-foundation/create-named-anonymous-function": "^2.0.0",
+    "@anio-software/npm-package-bundler": "^1.0.0"
+  },
+  "scripts": {
+    "prepare": "./node_modules/.bin/npm-package-bundler ."
+  },
+  "files": [
+    "./dist/package.mjs"
+  ]
+}
