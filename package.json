@@ -10,7 +10,6 @@
     "url": "git+https://github.com/anio-js-foundation/create-modifier-function.git"
   },
   "devDependencies": {
-    "@anio-js-foundation/create-named-anonymous-function": "^2.0.0",
     "@anio-software/npm-package-bundler": "^1.0.0"
   },
   "scripts": {

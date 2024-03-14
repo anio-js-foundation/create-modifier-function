@@ -1,21 +1,28 @@
-import createNamedAnonymousFunction from "@anio-js-foundation/create-named-anonymous-function"
-
-export default function(fn_name, fn_impl, modifiers) {
-	let modifier_list = []
-
-	let new_fn = createNamedAnonymousFunction(fn_name, (...args) => {
-		return fn_impl(modifier_list, ...args)
-	})
+function createModifierFunction(
+	fn, modifiers, modifier_list
+) {
+	// this effectively makes a copy of the function
+	const wrapped_fn = (...args) => fn(modifier_list, ...args)
 
 	for (const modifier of modifiers) {
-		Object.defineProperty(new_fn, modifier, {
+		Object.defineProperty(wrapped_fn, modifier, {
 			get() {
-				modifier_list.push(modifier)
+				let new_modifiers = [...modifier_list]
 
-				return new_fn
+				if (!new_modifiers.includes(modifier)) {
+					new_modifiers.push(modifier)
+				}
+
+				return createModifierFunction(
+					fn, modifiers, new_modifiers
+				)
 			}
 		})
 	}
 
-	return new_fn
+	return wrapped_fn
+}
+
+export default function(fn_impl, modifiers) {
+	return createModifierFunction(fn_impl, modifiers, [])
 }
